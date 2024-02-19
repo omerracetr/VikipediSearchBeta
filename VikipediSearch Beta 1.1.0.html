@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VikipediSearch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: url('https://www.teahub.io/photos/full/1-16327_windows-7-desktop-background-hd.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #FFFFFF;
+            padding: 10px;
+            text-align: center;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        nav {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            text-align: center;
+            border-radius: 20px; /* Köşeleri yuvarlatılmış */
+        }
+        nav input[type="text"] {
+            width: 90%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav input[type="submit"] {
+            width: 20%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: none;
+            background-color: #4285F4;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        nav input[type="submit"]:hover {
+            background-color: #2B7BFC;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .theme-toggle {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+<header>
+    <h1 style="font-size: 2rem;">Vikipedi'de Ara</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Hoş Geldiniz!</h2>
+        <p>Aramak istediğiniz anahtar kelimeleri girin ve ardından "Ara" düğmesine tıklayın.</p>
+    </section>
+
+    <nav>
+        <form action="https://tr.wikipedia.org/wiki/%C3%96zel:Ara" method="GET" target="_blank">
+            <input type="text" name="search" placeholder="Vikipedi'de Ara..." required>
+            <input type="submit" value="Ara">
+        </form>
+    </nav>
+</main>
+
+<footer>
+    <p>&copy; 2024 Vikipedi Search. Tüm hakları saklıdır.</p>
+</footer>
+
+<script>
+    // Sayfa yüklendiğinde tema modunu kontrol et
+    document.addEventListener("DOMContentLoaded", function() {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+            document.body.classList.add(savedTheme);
+            document.querySelector('.theme-toggle').textContent = savedTheme === "dark-mode" ? "☀️" : "🌙";
+        }
+    });
+
+    function toggleTheme() {
+        const body = document.body;
+        body.classList.toggle("dark-mode");
+        const themeToggle = document.querySelector('.theme-toggle');
+        const isDarkMode = body.classList.contains('dark-mode');
+        themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        
+        // Tema modunu yerel depolamada sakla
+        localStorage.setItem("theme", isDarkMode ? "dark-mode" : "");
+    }
+</script>
+
+</body>
+</html>
